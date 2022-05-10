@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head Tag Include -->
+<%- include("../partials/head-tag-partial.ejs") %>
+<!-- Head Tag Include -->
+
+<body>
+    <div id="app">
+        <!-- Header Include -->
+        <%- include("../partials/header-partial.ejs") %>
+        <!-- Header Include -->
+        <div class="container">
+            <div class="columns mt-5 is-multiline">
+                <div class="column is-12 has-text-centered">
+                    <img src="https://www.ais.th/vaccinesforthais/images/vaccines-logo.png">
+                    <p class="has-text-weight-bold is-size-2 mt-3">
+                        เชื่อมต่อ ช่วยเหลือ เพื่อคนไทยสู้ภัยโควิด
+                    </p>
+                    <p class="is-size-4">
+                        Connecting All Thais in the Fight Agianst COVID
+                    </p>
+                    <img class="mt-3" width="1000px" src="https://www.ais.th/vaccinesforthais/images/vaccine28-04-2022.png">
+                </div>
+                <div class="column is-12 has-text-centered mb-5">
+                    <a class="button is-rounded is-size-4 has-text-weight-bold" style="background-color: #b2d235;" href="/otp">ลงทะเบียนจองคิว - Register</a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+
+<!-- Footer Include -->
+<%- include("../partials/footer-partial.ejs") %>
+<!-- Footer Include -->
+
+</html>
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+        },
+    });
+</script>

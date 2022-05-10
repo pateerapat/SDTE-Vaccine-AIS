@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head Tag Include -->
+<%- include("../partials/head-tag-partial.ejs") %>
+<!-- Head Tag Include -->
+
+<body>
+    <div id="app">
+        <!-- Header Include -->
+        <%- include("../partials/header-partial.ejs") %>
+        <!-- Header Include -->
+        <div class="container">
+            <div class="columns mt-5 is-multiline">
+                <div class="column is-12 has-text-centered">
+                    <img width="1000px" src="https://vaccineforthais.ais.th/Images/MicrosoftTeams-image.png">
+                </div>
+                <div class="column is-6 is-offset-3">
+                    <p class="has-text-weight-bold">
+                        บริการลงทะเบียนรับวัคซีนโควิด-19 โดย เอไอเอส
+                    </p>
+                    <p>
+                        จัดสรรโดย กรมการแพทย์ กระทรวงสาธารณสุข และกระทรวงคมนาคม
+                    </p>
+                    <p class="mt-5 has-text-weight-bold">
+                        ระบุหมายเลขโทรศัพท์
+                    </p>
+                    <p>
+                        เพื่อล็อกอินลงทะเบียนรับวัคซีน
+                    </p>
+                    <div class="columns is-multiline">
+                        <div class="column is-6">
+                            <input style="font-family: 'Kanit';" class="input" placeholder="0XX-XXX-XXXX">
+                        </div>
+                        <div class="column is-6">
+                            <button style="font-family: 'Kanit'; background-color: #b2d235; color: white" class="button is-fullwidth" @click="isToggle = !isToggle; alertOTP()">รับรหัส OTP ทาง SMS</button>
+                        </div>
+                    </div>
+
+                    <span v-show="isToggle">
+                        <p class="mt-5 has-text-weight-bold">
+                            ระบุรหัส OTP ที่ได้รับทาง SMS
+                        </p>
+                        <p>
+                            เพื่อล็อกอินลงทะเบียนรับวัคซีน
+                        </p>
+                        <div class="columns is-multiline">
+                            <div class="column is-6">
+                                <input style="font-family: 'Kanit';" class="input" placeholder="XXXX">
+                            </div>
+                            <div class="column is-6">
+                                <a href="/data" style="font-family: 'Kanit'; background-color: #b2d235; color: white" class="button is-fullwidth">เข้าสู่ระบบ</a>
+                            </div>
+                        </div>
+                    </span>
+                    
+
+                    <ul class="mt-5">
+                        <b><li>กลุ่มอายุ 12-17 ปี</li></b>
+                        •&nbsp;รับวัคซีนเข็ม 3: ฉีด 2 เข็ม ครบ 120 วัน<br><br><b>
+                        <li>กลุ่มอายุ 18 ปี ขึ้นไป</li></b>•&nbsp;รับวัคซีนเข็ม 3: ฉีด 2 เข็ม ครบ 90 วัน<br> •&nbsp;รับวัคซีนเข็ม 4: ฉีด 3 เข็ม ครบ 120 วัน<br><br><b><li>สถานที่: สถานีกลางบางซื่อ</li></b>
+                    </ul>
+                    <ul>
+                        <li><b>• รอรับ SMS แจ้งผลลงทะเบียนภายใน 2 ชม.</b></li>
+                        <li><b>• 1 หมายเลข (ค่ายใดก็ได้) / 5 บัตรประชาชน บัตรชมพู หรือพาสปอร์ต</b></li>
+                    </ul>
+                    <div class="has-text-centered mt-5 mb-5">
+                        <a class="button" href="https://m.ais.co.th/vaccine-faq" style="background-color: #5c8e26; color: white;">
+                        ดูคำถามพบบ่อย
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+
+<!-- Footer Include -->
+<%- include("../partials/footer-partial.ejs") %>
+<!-- Footer Include -->
+
+</html>
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            isToggle: false,
+            otp: "",
+        },
+        methods: {
+            alertOTP: function () {
+                this.otp = Math.floor(Math.random() * 10000);
+                alert(this.otp);
+            }
+        }
+    });
+</script>

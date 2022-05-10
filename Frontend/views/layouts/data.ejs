@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head Tag Include -->
+<%- include("../partials/head-tag-partial.ejs") %>
+<!-- Head Tag Include -->
+
+<body>
+    <div id="app">
+        <!-- Header Include -->
+        <%- include("../partials/header-partial.ejs") %>
+        <!-- Header Include -->
+        <div class="container">
+            <div class="columns mt-5 is-multiline">
+                <div class="column is-12 has-text-centered">
+                    <img width="1000px" src="https://vaccineforthais.ais.th/Images/MicrosoftTeams-image.png">
+                </div>
+                <form method="POST" action="/next">
+                    <div class="col-md-10 offset-md-1 col-12 p-2">
+                        <div class="col-12 pl-2 pt-3">
+                            <h3 class="txt-green">ข้อมูลผู้ลงทะเบียนรับวัคซีน</h3>
+                        </div>
+                        <hr class="green">
+                        <div class="row form-group mt-5">
+                        <label class="col-md-6 pt-2">
+                        <span class="pl-2">คำนำหน้า*</span>
+                        </label>
+                        <div class="col-md-6">
+                        <select class="form-control" data-val="true" data-val-required="* กรุณาเลือก" id="prefix" name="title"><option value="">กรุณาเลือก</option>
+                        <option value="นาย">นาย</option>
+                        <option value="นาง">นาง</option>
+                        <option value="นางสาว">นางสาว</option>
+                        <option value="ด.ช.">ด.ช.</option>
+                        <option value="ด.ญ.">ด.ญ.</option>
+                        </select>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="prefix" data-valmsg-replace="true"></span>
+                        </div>
+                        <p class="clearfix"></p>
+                        <label class="col-md-6 pt-2">
+                        <span class="pl-2">ชื่อ*</span>
+                        </label>
+                        <div class="col-md-6">
+                        <input class="form-control" data-val="true" data-val-required="* กรุณากรอก" id="Name" name="first_name" required="required" type="text" value="" autocomplete="off" aria-required="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+                        </div>
+                        <p class="clearfix"></p>
+                        <label class="col-md-6 pt-2">
+                        <span class="pl-2">นามสกุล*</span>
+                        </label>
+                        <div class="col-md-6">
+                        <input class="form-control" data-val="true" data-val-required="* กรุณากรอก" id="Lastname" name="last_name" required="required" type="text" value="" autocomplete="off" aria-required="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Lastname" data-valmsg-replace="true"></span>
+                        </div>
+                        <p class="clearfix"></p>
+                        <label class="col-md-6 pt-2">
+                        <span class="pl-2">เพศ*</span>
+                        </label>
+                        <div class="col-md-6">
+                        <select class="form-control custom-select" data-val="true" data-val-required="* กรุณาเลือก" id="sex" name="sex"><option value="">กรุณาเลือก</option>
+                        <option value="M">ชาย</option>
+                        <option value="F">หญิง</option>
+                        </select>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="prefix" data-valmsg-replace="true"></span>
+                        </div>
+                        <p class="clearfix"></p>
+                        <label class="col-md-6 pt-2">
+                        <span class="pl-2">วัน-เดือน-ปี เกิด*</span>
+                        </label>
+                        <div class="col-md-6">
+                        <div class="input-group">
+                        <input type="hidden" id="age" value="0">
+                        <input class="form-control" data-val="true" data-val-remote="'birthdate' is invalid." data-val-remote-additionalfields="*.birthdate" data-val-remote-url="/RemoteValidation/CheckAge" data-val-required="* กรุณากรอก" id="dataBirdday" name="birth_date" onchange="controller.ChangeBirdday();" placeholder="วัน-เดือน-ปี (พ.ศ.) 25-12-2545" type="text" value="" maxlength="10" autocomplete="off">
+                        </div>
+                        <span class="text-danger"><span>สำคัญ! กรุณาทวนวันเดือนปีเกิดให้ถูกต้อง</span></span><br>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="birthdate" data-valmsg-replace="true"></span>
+                        </div>
+                        <p class="clearfix"></p>
+                        <label class="col-md-6 pt-2">
+                        <span class="pl-2">บัตรประจำตัว*</span>
+                        </label>
+                        <div class="col-md-6">
+                        <label class="radio-inline mr-2"><input class="mr-1" type="radio" name="optradio" value="idcard" checked="">บัตรประชาชน</label>
+                        <label class="radio-inline mr-2"><input class="mr-1" type="radio" name="optradio" value="pinkcard">บัตรชมพู</label>
+                        <label class="radio-inline mr-2"><input class="mr-1" type="radio" name="optradio" value="passport">พาสปอร์ต</label>
+                        </div>
+                        <p class="clearfix"></p>
+                        <label class="col-md-6 pt-2" id="fidcard1">
+                        <span class="pl-2">หมายเลขบัตรประจำตัว*</span>
+                        </label>
+                        <div class="col-md-6" id="fidcard2">
+                        <input id="_idcard" name="citizen_id" type="password" value="" style="display: none;">
+                        <div class="input-group">
+                        <input autocomplete="off" class="form-control" data-val="true" data-val-remote="'IdCard' is invalid." data-val-remote-additionalfields="*.IdCard" data-val-remote-url="/RemoteValidation/CheckIDCard" data-val-required="* กรุณากรอก" id="IdCard" name="IdCard" required="required" type="text" value="" maxlength="17" aria-required="true">
+                        </div>
+                        <span class="text-danger">
+                        <span>สำคัญ! กรุณาทวนเลขบัตรประชาชนของคุณให้ถูกต้อง</span>
+                        </span><br>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="IdCard" data-valmsg-replace="true"></span>
+                        </div>
+                        <p class="clearfix"></p>
+                        <label class="col-md-6 pt-2" id="fpassport1" style="display:none;">
+                        <span class="pl-2">หมายเลขพาสปอร์ต*</span>
+                        </label>
+                        <div class="col-md-6" id="fpassport2" style="display:none;">
+                        <div class="input-group">
+                        <input autocomplete="off" class="form-control" data-val="true" data-val-minlength="* กรุณากรอกอย่างน้อย 6 ตัวอักษร" data-val-minlength-min="6" data-val-remote="'Passport' is invalid." data-val-remote-additionalfields="*.Passport" data-val-remote-url="/RemoteValidation/CheckPassport" data-val-required="* กรุณากรอก" id="Passport" maxlength="13" name="Passport" required="required" style="text-transform: uppercase;" type="text" value="" aria-required="true">
+                        </div>
+                        <span class="text-danger">
+                        <span>สำคัญ! กรุณาทวนหมายเลขพาสปอร์ตของคุณให้ถูกต้อง</span>
+                        </span><br>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Passport" data-valmsg-replace="true"></span>
+                        </div>
+                        <p class="clearfix"></p>
+                        <label class="col-md-6 pt-2" id="fnation1" style="display:none;">
+                        <span class="pl-2">สัญชาติ*</span>
+                        </label>
+                        <div class="col-md-6" id="fnation2" style="display:none;">
+                        <select class="form-control" data-val="true" data-val-required="* กรุณาเลือก" id="Nationality" name="Nationality"><option value="">กรุณาเลือก</option>
+                        <option value="001">อังกฤษ</option>
+                        <option value="002">โปรตุเกส</option>
+                        <option value="003">ดัตช์</option>
+                        <option value="004">เยอรมัน</option>
+                        <option value="005">ฝรั่งเศส</option>
+                        <option value="006">เดนมาร์ก</option>
+                        <option value="007">สวีเดน</option>
+                        <option value="008">สวิส</option>
+                        <option value="009">อิตาลี</option>
+                        <option value="010">นอร์เวย์</option>
+                        <option value="011">ออสเตรีย</option>
+                        <option value="012">ไอริช</option>
+                        <option value="013">ฟินแลนด์</option>
+                        <option value="014">เบลเยียม</option>
+                        <option value="015">สเปน</option>
+                        <option value="016">รัสเซีย</option>
+                        <option value="017">โปแลนด์</option>
+                        <option value="018">เช็ก</option>
+                        <option value="019">ฮังการี</option>
+                        <option value="020">กรีก</option>
+                        <option value="021">ยูโกสลาฟ</option>
+                        <option value="022">ลักเซมเบิร์ก</option>
+                        <option value="023">วาติกัน</option>
+                        <option value="024">มอลตา</option>
+                        <option value="025">ลีซู</option>
+                        <option value="026">บัลแกเรีย</option>
+                        <option value="027">โรมาเนีย</option>
+                        <option value="028">ไซปรัส</option>
+                        <option value="029">อเมริกัน</option>
+                        <option value="030">แคนาดา</option>
+                        <option value="031">เม็กซิกัน</option>
+                        <option value="032">คิวบา</option>
+                        <option value="033">อาร์เจนตินา</option>
+                        <option value="034">บราซิล</option>
+                        <option value="035">ชิลี</option>
+                        <option value="036">อาข่า</option>
+                        <option value="037">โคลัมเบีย</option>
+                        <option value="038">ลั๊ว</option>
+                        <option value="039">เปรู</option>
+                        <option value="040">ปานามา</option>
+                        <option value="041">อุรุกวัย</option>
+                        <option value="042">เวเนซุเอลา</option>
+                        <option value="044">จีน</option>
+                        <option value="045">อินเดีย</option>
+                        <option value="046">เวียดนาม</option>
+                        <option value="047">ญี่ปุ่น</option>
+                        <option value="048">เมียนมา (พม่า)</option>
+                        <option value="049">ฟิลิปปิน</option>
+                        <option value="050">มาเลเซีย</option>
+                        <option value="051">อินโดนีเซีย</option>
+                        <option value="052">ปากีสถาน</option>
+                        <option value="053">เกาหลีใต้</option>
+                        <option value="054">สิงคโปร์</option>
+                        <option value="055">เนปาล</option>
+                        <option value="056">ลาว</option>
+                        <option value="057">กัมพูชา</option>
+                        <option value="058">ศรีลังกา</option>
+                        <option value="059">ซาอุดีอาระเบีย</option>
+                        <option value="060">อิสราเอล</option>
+                        <option value="061">เลบานอน</option>
+                        <option value="062">อิหร่าน</option>
+                        <option value="063">ตุรกี</option>
+                        <option value="064">บังกลาเทศ</option>
+                        <option value="065">ถูกถอนสัญชาติ</option>
+                        <option value="066">ซีเรีย</option>
+                        <option value="067">อิรัก</option>
+                        <option value="068">คูเวต</option>
+                        <option value="069">บรูไน</option>
+                        <option value="070">แอฟริกาใต้</option>
+                        <option value="071">กะเหรี่ยง</option>
+                        <option value="072">ลาหู่</option>
+                        <option value="073">เคนยา</option>
+                        <option value="074">อียิปต์</option>
+                        <option value="075">เอธิโอเปีย</option>
+                        <option value="076">ไนจีเรีย</option>
+                        <option value="077">สหรัฐอาหรับเอมิเรตส์</option>
+                        <option value="078">กินี</option>
+                        <option value="079">ออสเตรเลีย</option>
+                        <option value="080">นิวซีแลนด์</option>
+                        <option value="081">ปาปัวนิวกินี</option>
+                        <option value="082">ม้ง</option>
+                        <option value="083">เมี่ยน</option>
+                        <option value="086">จีนฮ่อ</option>
+                        <option value="087">จีน (อดีตทหารจีนคณะชาติ ,อดีตทหารจีนชาติ)</option>
+                        <option value="088">ผู้พลัดถิ่นสัญชาติพม่า</option>
+                        <option value="089">ผู้อพยพเชื้อสายจากกัมพูชา</option>
+                        <option value="090">ลาว (ลาวอพยพ)</option>
+                        <option value="091">เขมรอพยพ</option>
+                        <option value="096">ไร้สัญชาติ</option>
+                        <option value="097">อื่นๆ</option>
+                        <option value="098">ไม่ได้สัญชาติไทย</option>
+                        <option value="099">ไทย</option>
+                        <option value="100">อัฟกัน</option>
+                        <option value="101">บาห์เรน</option>
+                        <option value="102">ภูฏาน</option>
+                        <option value="103">จอร์แดน</option>
+                        <option value="104">เกาหลีเหนือ</option>
+                        <option value="105">มัลดีฟ</option>
+                        <option value="106">มองโกเลีย</option>
+                        <option value="107">โอมาน</option>
+                        <option value="108">กาตาร์</option>
+                        <option value="109">เยเมน</option>
+                        <option value="111">หมู่เกาะฟิจิ</option>
+                        <option value="112">คิริบาส</option>
+                        <option value="113">นาอูรู</option>
+                        <option value="114">หมู่เกาะโซโลมอน</option>
+                        <option value="115">ตองก้า</option>
+                        <option value="116">ตูวาลู</option>
+                        <option value="117">วานูอาตู</option>
+                        <option value="118">ซามัว</option>
+                        <option value="119">แอลเบเนีย</option>
+                        <option value="120">อันดอร์รา</option>
+                        <option value="122">ไอซ์แลนด์</option>
+                        <option value="123">ลิกเตนสไตน์</option>
+                        <option value="124">โมนาโก</option>
+                        <option value="125">ซานมารีโน</option>
+                        <option value="126">บริติช (อังกฤษ, สก็อตแลนด์)</option>
+                        <option value="127">แอลจีเรีย</option>
+                        <option value="128">แองโกลา</option>
+                        <option value="129">เบนิน</option>
+                        <option value="130">บอตสวานา</option>
+                        <option value="131">บูร์กินาฟาโซ</option>
+                        <option value="132">บุรุนดี</option>
+                        <option value="133">แคเมอรูน</option>
+                        <option value="134">เคปเวิร์ด</option>
+                        <option value="135">แอฟริกากลาง</option>
+                        <option value="136">ชาด</option>
+                        <option value="137">คอโมโรส</option>
+                        <option value="138">คองโก</option>
+                        <option value="139">ไอโวเรี่ยน</option>
+                        <option value="140">จิบูตี</option>
+                        <option value="141">อิเควทอเรียลกินี</option>
+                        <option value="142">กาบอง</option>
+                        <option value="143">แกมเบีย</option>
+                        <option value="144">กานา</option>
+                        <option value="145">กินีบีสเซา</option>
+                        <option value="146">เลโซโท</option>
+                        <option value="147">ไลบีเรีย</option>
+                        <option value="148">ลิเบีย</option>
+                        <option value="149">มาลากาซี</option>
+                        <option value="150">มาลาวี</option>
+                        <option value="151">มาลี</option>
+                        <option value="152">มอริเตเนีย</option>
+                        <option value="153">มอริเชียส</option>
+                        <option value="154">โมร็อกโก</option>
+                        <option value="155">โมซัมบิก</option>
+                        <option value="156">ไนเจอร์</option>
+                        <option value="157">รวันดา</option>
+                        <option value="158">เซาโตเมและปรินซิเป</option>
+                        <option value="159">เซเนกัล</option>
+                        <option value="160">เซเชลส์</option>
+                        <option value="161">เซียร์ราลีโอน</option>
+                        <option value="162">โซมาลี</option>
+                        <option value="163">ซูดาน</option>
+                        <option value="164">สวาซี</option>
+                        <option value="165">แทนซาเนีย</option>
+                        <option value="166">โตโก</option>
+                        <option value="167">ตูนิเซีย</option>
+                        <option value="168">ยูกันดา</option>
+                        <option value="169">ซาอีร์</option>
+                        <option value="170">แซมเบีย</option>
+                        <option value="171">ซิมบับเว</option>
+                        <option value="172">แอนติกาและบาร์บูดา</option>
+                        <option value="173">บาฮามาส</option>
+                        <option value="174">บาร์เบโดส</option>
+                        <option value="175">เบลิซ</option>
+                        <option value="176">คอสตาริกา</option>
+                        <option value="177">โดมินิกา</option>
+                        <option value="178">โดมินิกัน</option>
+                        <option value="179">เอลซัลวาดอร์</option>
+                        <option value="180">เกรเนดา</option>
+                        <option value="181">กัวเตมาลา</option>
+                        <option value="182">เฮติ</option>
+                        <option value="183">ฮอนดูรัส</option>
+                        <option value="184">จาเมกา</option>
+                        <option value="185">นิการากัว</option>
+                        <option value="186">เซนต์คิตส์และเนวิส</option>
+                        <option value="187">เซนต์ลูเซีย</option>
+                        <option value="188">เซนต์วินเซนต์และเกรนาดีนส์</option>
+                        <option value="189">ตรินิแดดและโตเบโก</option>
+                        <option value="190">โบลีเวีย</option>
+                        <option value="191">เอกวาดอร์</option>
+                        <option value="192">กายอานา</option>
+                        <option value="193">ปารากวัย</option>
+                        <option value="194">ซูรินาเม</option>
+                        <option value="195">อาหรับ</option>
+                        <option value="196">คะฉิ่น</option>
+                        <option value="197">ว้า</option>
+                        <option value="198">ไทยใหญ่</option>
+                        <option value="199">ไทยลื้อ</option>
+                        <option value="200">ขมุ</option>
+                        <option value="201">ตองสู</option>
+                        <option value="203">ละว้า</option>
+                        <option value="205">ปะหร่อง</option>
+                        <option value="206">ถิ่น</option>
+                        <option value="207">ปะโอ</option>
+                        <option value="208">มอญ</option>
+                        <option value="209">มลาบรี</option>
+                        <option value="212">จีน (จีนฮ่ออิสระ)</option>
+                        <option value="214">จีน (จีนฮ่ออพยพ)</option>
+                        <option value="216">ยูเครน</option>
+                        <option value="219">จีน(ฮ่องกง)</option>
+                        <option value="220">จีน(ไต้หวัน)</option>
+                        <option value="221">โครเอเชีย</option>
+                        <option value="223">คาซัค</option>
+                        <option value="224">อาร์เมเนีย</option>
+                        <option value="225">อาเซอร์ไบจาน</option>
+                        <option value="226">จอร์เจีย</option>
+                        <option value="227">คีร์กีซ</option>
+                        <option value="228">ทาจิก</option>
+                        <option value="229">อุซเบก</option>
+                        <option value="230">หมู่เกาะมาร์แชลล์</option>
+                        <option value="231">ไมโครนีเซีย</option>
+                        <option value="232">ปาเลา</option>
+                        <option value="233">เบลารุส</option>
+                        <option value="234">บอสเนียและเฮอร์เซโกวีนา</option>
+                        <option value="235">เติร์กเมน</option>
+                        <option value="236">เอสโตเนีย</option>
+                        <option value="237">ลัตเวีย</option>
+                        <option value="238">ลิทัวเนีย</option>
+                        <option value="239">มาซิโดเนีย</option>
+                        <option value="240">มอลโดวา</option>
+                        <option value="241">สโลวัก</option>
+                        <option value="242">สโลวีน</option>
+                        <option value="243">เอริเทรีย</option>
+                        <option value="244">นามิเบีย</option>
+                        <option value="245">โบลิเวีย</option>
+                        <option value="246">หมู่เกาะคุก</option>
+                        <option value="247">เนปาล (เนปาลอพยพ)</option>
+                        <option value="248">มอญ (ผู้พลัดถิ่นสัญชาติพม่า)</option>
+                        <option value="249">ไทยใหญ่ (ผู้พลัดถิ่นสัญชาติพม่า)</option>
+                        <option value="250">เวียดนาม (ญวนอพยพ)</option>
+                        <option value="251">มาเลเชีย (อดีต จีนคอมมิวนิสต์)</option>
+                        <option value="252">จีน (อดีต จีนคอมมิวนิสต์)</option>
+                        <option value="253">สิงคโปร์ (อดีต จีนคอมมิวนิสต์)</option>
+                        <option value="254">กะเหรี่ยง (ผู้หลบหนีเข้าเมือง)</option>
+                        <option value="255">มอญ (ผู้หลบหนีเข้าเมือง)</option>
+                        <option value="256">ไทยใหญ่ (ผู้หลบหนีเข้าเมือง)</option>
+                        <option value="257">กัมพูชา (ผู้หลบหนีเข้าเมือง)</option>
+                        <option value="258">มอญ (ชุมชนบนพื้นที่สูง)</option>
+                        <option value="259">กะเหรี่ยง (ชุมชนบนพื้นที่สูง)</option>
+                        <option value="260">ปาเลสไตน์</option>
+                        <option value="261">ติมอร์-เลสเต</option>
+                        <option value="262">สละสัญชาติไทย</option>
+                        <option value="263">เซอร์เบีย แอนด์ มอนเตเนโกร</option>
+                        <option value="264">กัมพูชา(แรงงาน)</option>
+                        <option value="265">เมียนมา(แรงงาน)</option>
+                        <option value="266">ลาว(แรงงาน)</option>
+                        <option value="267">เซอร์เบียน</option>
+                        <option value="268">มอนเตเนกริน</option>
+                        <option value="270">กาบูเวอร์ดี</option>
+                        <option value="271">คอซอวอ</option>
+                        <option value="272">เซาท์ซูดาน</option>
+                        <option value="989">บุคคลที่ไม่มีสถานะทางทะเบียน</option>
+                        <option value="999">ไม่ระบุ</option>
+                        </select>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Nationality" data-valmsg-replace="true"></span>
+                        </div>
+                        <p class="clearfix"></p>
+                        </div>
+                        <div class="col-12 pl-2 pt-3">
+                        <h3 class="txt-green">ข้อมูลการติดต่อ</h3>
+                        </div>
+                        <hr class="green">
+                        <div class="row form-group mt-5">
+                        <label class="col-md-6 pt-2">
+                        <span class="pl-2">หมายเลขโทรศัพท์ของผู้รับวัคซีน *</span>
+                        </label>
+                        <div class="col-md-6">
+                        <input disabled="Disabled" class="form-control" data-val="true" data-val-regex="* หมายเลขโทรศัพท์ไม่ถูกต้อง (0XX-XXX-XXXX)" data-val-regex-pattern="^0\(?([5-9]{1}[0-9]{1})*-([0-9]{3})*-([0-9]{4})$" data-val-remote="* หมายเลขโทรศัพท์มีการลงทะเบียนไว้แล้ว" data-val-remote-additionalfields="*.MobileNumber" data-val-remote-url="/RemoteValidation/CheckDuplicateMobileNumber" data-val-required="* กรุณากรอก" id="MobileNumber" name="MobileNumber" type="text" value="0618291665" maxlength="12" autocomplete="off">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="MobileNumber" data-valmsg-replace="true"></span>
+                        </div>
+                        <p class="clearfix"></p>
+                        <label class="col-md-6 pt-2">
+                        <span class="pl-2">Line ID</span>
+                        </label>
+                        <div class="col-md-6">
+                        <input class="form-control" id="LineId" name="line_id" type="text" value="" autocomplete="off">
+                        </div>
+                        <p class="clearfix"></p>
+                        <label class="col-md-6 pt-2">
+                        <span class="pl-2">อีเมล</span>
+                        </label>
+                        <div class="col-md-6">
+                        <input autocomplete="off" class="form-control" data-val="true" data-val-remote="'Email' is invalid." data-val-remote-additionalfields="*.Email" data-val-remote-url="/RemoteValidation/Email" id="Email" name="email" type="text" value="">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                        </div>
+                        <p class="clearfix"></p>
+                        </div>
+                        
+                        
+                        <p class="clearfix"></p>
+                        <input value="false" data-val="true" data-val-required="* กรุณาเลือก" id="isTradeDropdown" name="IsTrade" type="hidden">
+                        <br>
+                        <p class="clearfix"></p>
+                        
+                        <div id="home1" class="hide">
+                        </div>
+                        
+                        
+                        <div id="region1" class="hide show">
+                        <div style="display:none;">
+                        <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                        <a class="nav-link active show" id="branch" data-toggle="pill" href="#pills-b" role="tab" aria-controls="pills-b" aria-selected="false">สาขา</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" id="datetime" data-toggle="pill" href="#pills-b" role="tab" aria-controls="#pills-b" aria-selected="false">วัน / เวลา</a>
+                        </li>
+                        </ul>
+                        </div>
+                        
+                        
+                        <div class="tab-content" id="pills-tabContent">
+                        
+                        <div class="tab-pane fade active show" id="pills-b" role="tabpanel">
+                        <div class="card mt-5">
+                        <div class="card-header card-bg-green text-center" style="background-color: #b2d235">
+                        <span class="text-white">ที่อยู่ที่ติดต่อได้</span>
+                        </div>
+                        <div class="card-body">
+                        <div class="row">
+                        <div class="col-12 col-md-6 mb-4">
+                        <label class="control-label pl-2">บ้านเลขที่*</label> 
+                        <input class="form-control" data-val="true" data-val-required="* กรุณากรอก" id="AddressHomeNumber" name="home_number" required="required" type="text" value="" autocomplete="off" aria-required="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="AddressHomeNumber" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="col-12 col-md-6 mb-4">
+                        <label class="control-label pl-2">หมู่</label>
+                        <input class="form-control" id="AddressMoo" name="AddressMoo" type="text" value="" autocomplete="off">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="AddressMoo" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="col-12 col-md-6 mb-4">
+                        <label class="control-label pl-2">หมู่บ้าน</label>
+                        <input class="form-control" id="AddressVillage" name="home_village" type="text" value="" autocomplete="off">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="AddressVillage" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="col-12 col-md-6 mb-4">
+                        <label class="control-label pl-2">อาคาร / ชั้น / ห้อง</label>
+                        <input class="form-control" id="AddressBuildingFloorRoom" name="tower" type="text" value="" autocomplete="off">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="AddressBuildingFloorRoom" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="col-12 col-md-6 mb-4">
+                        <label class="control-label pl-2">ถนน*</label>
+                        <input class="form-control" data-val="true" data-val-required="* กรุณากรอก" id="road" name="AddressRoad" required="required" type="text" value="" autocomplete="off" aria-required="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="AddressRoad" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="col-12 col-md-6 mb-4">
+                        <label class="control-label pl-2">ซอย</label>
+                        <input class="form-control" id="AddressSoi" name="alley" type="text" value="" autocomplete="off">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="AddressSoi" data-valmsg-replace="true"></span>
+                        </div>
+                        <input data-val="true" data-val-regex="* รหัสไปรษณีย์ไม่ถูกต้อง" data-val-regex-pattern="^([1-9][0-9][0-9][0-9][0-9])$" data-val-required="* กรุณากรอก" id="AddressZipCode" name="AddressZipCode" type="hidden" value="">
+                        <input data-val="true" data-val-required="* กรุณาเลือก" id="AddressSubDistrict" name="AddressSubDistrict" type="hidden" value="">
+                        <input data-val="true" data-val-required="* กรุณาเลือก" id="AddressDistrict" name="AddressDistrict" type="hidden" value="">
+                        <input data-val="true" data-val-required="* กรุณาเลือก" id="AddressProvince" name="AddressProvince" type="hidden" value="">
+                        <div class="col-12 col-md-12 mb-4">
+                        <label class="h4">พิมพ์ ตำบล อำเภอ จังหวัด หรือ รหัสไปรษณีย์ (อย่างใด อย่างหนึ่ง) เพื่อระบุที่อยู่ของคุณ</label>
+                        <input id="searchaddr" name="postal_code" class="form-control" type="text" autocomplete="off">
+                        <input class="form-control" data-val="true" data-val-required="* กรุณากรอก" id="showaddress" name="showaddress" readonly="readonly" required="required" style="font-weight:bold;" type="text" value="" autocomplete="off" aria-required="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="showaddress" data-valmsg-replace="true"></span>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        <div class=" col-md-10 offset-md-1 col-12">
+                        <div class="col text-center mt-5 mb-3">
+                        <h2 class="txt-green"></h2>
+                        </div>
+                        </div>
+                        <div id="control">
+                        <div style="display:none;">
+                        <div class="col-12 pl-2 pt-3">
+                        <h3 class="txt-green">ภูมิภาค</h3>
+                        </div>
+                        <hr class="green">
+                        <div class="row form-group mt-0 p-4">
+                        <select class="form-control custom-select" id="Region" name="Region"><option value="">-- กรุณาเลือกภูมิภาค --</option>
+                        <option selected="selected" value="Bangkok Metropolitan Region">กรุงเทพมหานครและปริมณฑล</option>
+                        </select>
+                        </div>
+                        <p class="clearfix"></p>
+                        <div class="col-12 pl-2 pt-3">
+                        <h3 class="txt-green">จังหวัด</h3>
+                        </div>
+                        <hr class="green">
+                        <div class="row form-group mt-0 p-4">
+                        <select class="form-control custom-select" id="BranchProvince" name="BranchProvince"><option value="">-- กรุณาเลือกจังหวัด --</option><option value="Bangkok Metropolitan Region">กรุงเทพและปริมณฑล</option></select>
+                        </div>
+                        <p class="clearfix"></p>
+                        <div class="col-12 pl-2 pt-3">
+                        <h3 class="txt-green">ห้างสรรพสินค้า</h3>
+                        </div>
+                        <hr class="green">
+                        <div class="row form-group mt-0 p-4">
+                        <select class="form-control custom-select" id="MallGroup" name="MallGroup"><option value="">-- ห้างสรรพสินค้า --</option><option value="Central Station Bang Sue">สถานีกลางบางซื่อ</option></select>
+                        </div>
+                        <p class="clearfix"></p>
+                        <div class="col-12 pl-2 pt-3">
+                        <h3 class="txt-green">สถานที่รับวัคซีน</h3>
+                        </div>
+                        <hr class="green">
+                        <div class="row form-group mt-0 p-4">
+                        <select class="form-control custom-select" id="Mall" name="Mall"><option value="">-- สาขา --</option><option value="Central Station Bang Sue">สถานีกลางบางซื่อ</option></select>
+                        </div>
+                        </div>
+                        <p class="clearfix"></p>
+                        <div class="row form-group mt-0 p-4" style="display:none;">
+                        <input type="text" id="txtSearchBranch" class="form-control" onkeyup="SearchBranch()">
+                        </div>
+                        <p class="clearfix"></p>
+                        <div>
+                        <div class="card">
+                        <div class="card-header card-bg-gray">
+                        <h3 class="txt-green">เลือกสถานที่ และเข็มที่ต้องการฉีด (ชนิดวัคซีนที่ได้รับ ขึ้นอยู่กับกรมการแพทย์จัดสรรในแต่ละวัน)</h3>
+                        </div>
+                        <div class="card-body" id="SelectBranch" style="padding: unset !important; position: static; zoom: 1;">
+                        <div class="tab-content">
+                        <div id="branchtype" class="tab_content scrolling active" style="height:650px;">
+                        <div class="custom-control custom-radio ml-5 my-3 text-center">
+                        <span>สถานที่ที่คุณเลือกยังไม่มีบริการฉีดวัคซีน สำหรับผู้ที่มีอายุน้อยกว่า 12 ปี</span>
+                        </div>
+                        <script>
+                            function SearchBranch() {
+                                var text = $('#txtSearchBranch').val();
+                                if (text != '') {
+                                    $('#SelectBranch').find('.custom-radio').each(function () {
+                                        if ($(this).find('label').text().toLowerCase().trim().indexOf(text.toLowerCase()) > -1) {
+                                            $(this).parent().show();
+                                        } else {
+                                            $(this).parent().hide();
+                                        }
+                                        $(this).find('input[type=radio]').prop('checked', false);
+                                    });
+                                } else {
+                                    $('#SelectBranch').find('.active').show();
+                                    $('#SelectBranch').find('.BranchRow').each(function () {
+                                        $(this).show();
+                                        //console.log($(this).html());
+                                        $(this).find('input[type=radio]').prop('checked', false);
+                                    });
+                                }
+                            }
+                        </script>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                if ($('.BranchRow').length == 1) {
+                        
+                                    $('.BranchRow').each(function () {
+                                        //$(this).find('.custom-control').find('input[type=radio]').prop('checked', true);
+                                        $(this).find('.custom-control').find('input[type=radio]').click();
+                                        
+                                    });
+                        
+                                }
+                        
+                            });
+                        </script></div>
+                        
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        <div class="col-12 pl-2 pt-5">
+                        <h3 class="txt-green">วัน-เวลารับวัคซีน</h3>
+                        </div>
+                        <hr class="green">
+                        <div class=" mt-3 row" id="rowreceivedate">
+                        <div class="col col-md-6 form-group">
+                        <select class="form-control custom-select" data-val="true" data-val-required="* กรุณาเลือก" id="SelectedDate" name="SelectedDate"><option value="">-- กรุณาเลือกวัน --</option></select>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="SelectedDate" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="col col-md-6 form-group">
+                        <select class="form-control custom-select" data-val="true" data-val-required="* กรุณาเลือก" id="SelectedTime" name="SelectedTime"><option value="">-- กรุณาเลือกเวลา --</option></select>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="SelectedTime" data-valmsg-replace="true"></span>
+                        </div>
+                        </div>
+                        <div class=" mt-3 row" id="rowreceivedatenotfound" style="display:none;">
+                        <div class="col col-md-12 form-group text-center text-danger">
+                        <span>ไม่สามารถลงทะเบียนหรือเปลี่ยนนัดได้ เนื่องจากศูนย์ฉีดฯนี้มีผู้จองเต็มจำนวนแล้ว กรุณาทำรายการใหม่อีกครั้งภายหลัง</span>
+                        </div>
+                        </div>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                var selectRegion = $('#Region option:selected').val();
+                                UpdateBranchProvince(selectRegion);
+                            });
+                        </script>
+                        </div>
+                        <div id="SendToHomeWording"></div>
+                        
+                        
+                        <div class="row">
+                        <div class="col col-md-3 mx-auto mt-5">
+                        <button type="submit" id="btnPriceSubmit" class="btn btn-block btn-green" style="background-color: #b2d235; color:white">ทำรายการ</button>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        <p class="clearfix mb-5"></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</body>
+
+<!-- Footer Include -->
+<%- include("../partials/footer-partial.ejs") %>
+<!-- Footer Include -->
+
+</html>
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            isToggle: false,
+        },
+    });
+</script>

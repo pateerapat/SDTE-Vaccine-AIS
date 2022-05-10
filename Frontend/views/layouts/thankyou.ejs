@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head Tag Include -->
+<%- include("../partials/head-tag-partial.ejs") %>
+<!-- Head Tag Include -->
+
+<body>
+    <div id="app">
+        <!-- Header Include -->
+        <%- include("../partials/header-partial.ejs") %>
+        <!-- Header Include -->
+        <div class="container">
+            <div class=" col-md-10 offset-md-1 col-12 ">
+            <br>
+            <div class="col text-center mt-5 mb-3">
+            <h1><b>AIS ได้รับข้อมูลของคุณแล้ว</b></h1>
+            <span style="font-size:30px;"><b><font color="#74a822">กรุณารอรับ SMS แจ้งผล</font></b></span><br>
+            <span style="font-size:30px;"><b><font color="#74a822">การลงทะเบียน ภายใน 2 ชม.</font><br><br>(กรณีจองให้ผู้อื่นเพิ่ม จะจองได้<br>เมื่อรับ SMS แจ้งผลของคุณแล้ว)</b></span>
+            </div>
+            <div class="row form-group mt-5 justify-content offset-md-2">
+            <ul style="font-size:25px;">
+            <li>
+            หากมีประวัติตรงตามเกณฑ์ของกระทรวงสาธารณสุข คุณจะได้รับ SMS ยืนยันวันนัดหมาย
+            </li>
+            <li>
+            หากไม่ตรงตามเกณฑ์ จะมี SMS แจ้งให้ทราบ
+            </li>
+            </ul>
+            </div>
+            <div class="col text-center mt-5 mb-3">
+            <h3><b>ขอบคุณที่ใช้บริการ</b></h3>
+            </div>
+            </div>
+            
+            <div class="d-none d-md-block">
+            <img class="img-fluid" src="https://vaccineforthais.ais.th/Images/MicrosoftTeams-image.png">
+            </div>
+            
+            <div class="d-md-none mx-auto">
+            <img class="img-fluid" src="https://vaccineforthais.ais.th/Images/MicrosoftTeams-image.png">
+            </div>
+            </div>
+    </div>
+</body>
+
+<!-- Footer Include -->
+<%- include("../partials/footer-partial.ejs") %>
+<!-- Footer Include -->
+
+</html>
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            isToggle: false,
+        },
+    });
+</script>

@@ -1,0 +1,60 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Pull code') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Setup environment') {
+            steps {
+                echo 'setup environment'
+            }
+        }
+        stage('Download dependencies') {
+            steps {
+                dir('Frontend') {
+                    sh 'npm install'
+                }
+            }
+        }
+        stage('Deploy development branch') {
+            steps {
+                echo 'automatic deploy development branch to heroku'
+            }
+        }
+        stage('Unit testing with coverage') {
+            steps {
+                dir('Frontend') {
+                    sh 'npm run test-unit'
+                }
+            }
+        }
+        stage('Component testing with coverage') {
+            steps {
+                echo 'run component testing'
+            }
+        }
+        stage('Integration testing with coverage') {
+            steps {
+                dir('Frontend') {
+                    sh 'npm run test-integration'
+                }
+            }
+        }
+        stage('E2E testing with coverage') {
+            steps {
+                dir('Frontend') {
+                    sh 'npm run test-e2e'
+                }
+            }
+        }
+        stage('Deploy main branch') {
+            steps {
+                echo 'automatic deploy main branch to heroku and docker'
+            }
+        }
+    }
+}
+

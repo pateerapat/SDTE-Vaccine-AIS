@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head Tag Include -->
+<%- include("../partials/head-tag-partial.ejs") %>
+<!-- Head Tag Include -->
+
+<body>
+    <div id="app">
+        <!-- Header Include -->
+        <%- include("../partials/header-partial.ejs") %>
+        <!-- Header Include -->
+        <div class="container">
+            <div class="container">
+                <div class=" col-md-10 offset-md-1 col-12 ">
+                <br>
+                <div class="col text-center mt-5 mb-3">
+                <h2 class="txt-green">
+                ตรวจสอบข้อมูล
+                </h2>
+                <h3>กรุณาตรวจสอบความถูกต้องของข้อมูล และกดปุ่มยืนยันด้านล่าง</h3>
+                </div>
+                <div class="row form-group mt-5 justify-content-center offset-md-3">
+                <label class="col col-sm-4 pt-2 text-left"> <span class="pl-2">ชื่อ - นามสกุล</span></label>
+                <label class="col col-sm-7 pt-2 txt-gray"><span class="pl-2">ธีรภัทร อักษรสารสิทธิ์</span></label>
+                <div class="w-100"></div>
+                
+                
+                <label class="col col-sm-4 pt-2 text-left"> <span class="pl-2">หมายเลขโทรศัพท์</span></label>
+                <label class="col col-sm-7 pt-2 txt-gray"><span class="pl-2">0618291665</span></label>
+                <div class="w-100"></div>
+                <label class="col col-sm-4 pt-2 text-left"> <span class="pl-2">หมายเลขบัตรประจำตัว</span></label>
+                <label class="col col-sm-7 pt-2 txt-gray"><span class="pl-2" id="txtID">XXXXXXXXX3175</span></label>
+                <div class="w-100"></div>
+                <label class="col col-sm-4 pt-2 text-left"> <span class="pl-2">สถานที่ และเข็มที่รับ</span></label>
+                <label class="col col-sm-7 pt-2 txt-gray"><span class="pl-2" style="display: inline-block">CVC-ศูนย์ฉีดวัคซีนกลางบางซื่อ: เข็มกระตุ้น เข็ม 4</span></label>
+                <div class="w-100"></div>
+                <label class="col col-sm-4 pt-2 text-left"> <span class="pl-2">วัน - เวลา</span></label>
+                <label class="col col-sm-7 pt-2 txt-gray"><span class="pl-2">31/5/2565 13.00 - 14.00 น.</span></label>
+                <div class="w-100"></div>
+                </div>
+                <p class="clearfix mt-5"></p>
+                <div class="row justify-content-center">
+                <div class="col-md-12 offset-md-2">
+                <p class="text-left">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                ข้าพเจ้ายินยอมให้กรมการแพทย์ กระทรวงสาธารณสุข เก็บรวบรวมใช้และประมวลผลข้อมูลส่วนบุคคล ได้แก่ ชื่อ นามสกุล วันเดือนปีเกิด เพศ เบอร์โทรศัพท์ ที่อยู่ เลขบัตรประจำตัวประชาชน ของข้าพเจ้า หรือกรณีข้าพเจ้าป็นผู้ดำเนินการแทนบุคคลอื่น ข้าพเจ้ายอมรับว่าได้รับความยินยอมจากเจ้าของข้อมูลส่วนบุคคลในการให้เปิดเผยข้อมูลส่วนบุคคลดังกล่าวข้างต้น เพื่อใช้สำหรับการนัดหมายลงทะเบียนรับการฉีดวัคซีนโควิด-19 และยินยอมให้บริษัท แอดวานซ์ ไวร์เลส เน็ทเวิร์ค จำกัด ในฐานะผู้พัฒนาเว็บไซต์ประมวลผลและเปิดเผยข้อมูลส่วนบุคคลของข้าพเจ้าและบุคคลดังกล่าวข้างต้นให้แก่กรมการแพทย์ กระทรวงสาธารณสุข เพื่อประโยชน์ของข้าพเจ้าตามวัตถุประสงค์ดังกล่าวข้างต้น โดยจะได้รับความคุ้มครองตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล พ.ศ.2562 กรณี ข้าพเจ้าดำเนินการไปโดยไม่มีอำนาจ ข้าพเจ้าตกลงรับผิดชอบเองทุกประการ
+                </p>
+                <p class="text-left">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                ข้าพเจ้ายอมรับว่าการไม่ให้ความยินยอมจะมีผลทำให้ข้าพเจ้าไม่สามารถลงทะเบียนนัดหมายเพื่อการฉีดวัคซีน โควิด-19 ผ่านเว็บไซต์นี้ได้
+                </p>
+                </div>
+                </div>
+                <div class="row justify-content-center">
+                
+                <label class="radio-inline" style="padding:2px">
+                <input type="radio" name="optradio" value="false"> ปฏิเสธ
+                </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label class="radio-inline" style="padding:2px">
+                <input type="radio" name="optradio" value="true"> ยอมรับ
+                </label>
+                
+                </div>
+                <br>
+                <div class="row justify-content-center">
+                <div class="col col-md-3">
+                <button type="button" class="btn btn-block btn-light" onclick="window.location.href='/Reserve/BackSummary'">ย้อนกลับ</button>
+                </div>
+                <div class="col col-md-3">
+                <a href="/thankyou" style="background-color: #b2d235; color:white" type="button" class="btn btn-block btn-green" id="SummarySubmit">
+                ยืนยัน </a>
+                </div>
+                </div>
+                <br>
+                </div>
+                </div>
+        </div>
+    </div>
+</body>
+
+<!-- Footer Include -->
+<%- include("../partials/footer-partial.ejs") %>
+<!-- Footer Include -->
+
+</html>
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            isToggle: false,
+        },
+    });
+</script>
